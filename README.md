@@ -80,9 +80,9 @@ php artisan key:generate
 
 ##### Now that we have added our application key, we can now get started interacting with our API. Lets get started!!
 
-### Lets Get Started!
+### Time To Start Working With The Star Wars Api!
 
-Now that we have our `.env` file added, we are done with `command line` let's dive right into this project!
+>Now that we have our `.env` file added, we are done with `command line` let's dive right into this project!
 
 ## Visit API Specification Docs
 
