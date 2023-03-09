@@ -109,8 +109,8 @@ Please see section below to learn how to use certain features, or check out our 
 
 The top section of this application includes links to all of the required execise requirements.
 If you are not interested in using the livewire component to perform api calls. You can use those buttons to quickly
-access the pages related to the requirements
-for completing this assignment.
+access the pages related to the requirements for completing this assignment.
+
 ![challenge](./public/assets/media/docs/challenge.gif)
 
 ### Livewire to perform HTTP Calls
