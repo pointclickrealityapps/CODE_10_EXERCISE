@@ -92,27 +92,28 @@ using BASH, Javascript, or PHP in real time directly from our docs portal.
 > Access Api Docs Portal  **[API Specification Docs Portal](/docs)** at anytime from your app by
 > visiting `http://yourwebsitedomain.com/docs`
 
-#### Visit Home Page
+## Visit Home Page
 
 Alternatively you can visit the root index page of your app, where you will find all the answers to the challege
 requirements at the very top.
 
 > Interact with api responses using livewire component. Home Page : http://yourwebsitedomain.com
 
-## How To Instructions / Test Cases
+### How-To Guide
 
 This application not only has a place for us to access Api docs, but we can also interact with our api via a front-end
 livewire component, or perform HTTP calls against our api without having to use an external program such as Postman.
 Please see section below to learn how to use certain features, or check out our docs portal to see api specs.
 
-#### Coding Exercise Requirements
+### Coding Exercise Requirements Answers
 
 The top section of this application includes links to all of the required execise requirements.
 If you are not interested in using the livewire component to perform api calls. You can use those buttons to quickly
 access the pages related to the requirements
 for completing this assignment.
+![challenge](./public/assets/media/docs/challenge.gif)
 
-### Using Laravel Livewire to perform HTTP Calls
+### Livewire to perform HTTP Calls
 
 Although not required, livewire was included to allow us to see what our api would look like in a real app.
 The responses being returned to the livewire component are 100% the same as the actual raw JSON output, this was just a
