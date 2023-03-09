@@ -53,7 +53,7 @@
             <!--begin::Table head-->
             <thead>
             <tr class="fs-7 fw-bold text-gray-400 border-bottom-0">
-                <th class="p-0 pb-3 min-w-175px text-start">NAME</th>
+                <th class="p-0 pb-3 min-w-275px text-start">NAME</th>
                 <th class="p-0 pb-3 min-w-175px text-start">BIRTH YEAR</th>
                 <th class="p-0 pb-3 min-w-100px text-end">HEIGHT</th>
                 <th class="p-0 pb-3 min-w-100px text-end">MASS</th>
@@ -81,19 +81,54 @@
                                 @php($urlArray = array_filter($urlArray))
                                 @php($personId = array_pop($urlArray))
 
-                                <div class="d-flex justify-content-start flex-column">
+                                <div class="d-flex justify-content-start flex-column ">
                                     <a wire:click="showPerson({{$personId}})"
-                                       class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{$result['name']}}</a>
-                                    <button class="btn btn-xs btn-dark" wire:click="showPerson({{$personId}})"><i
-                                            class="fa fa-eye"></i> View Profile
-                                    </button>
+                                       class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6"
+                                       data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click"
+                                       title="View this person profile directly"
+                                    >{{$result['name']}}</a>
+
                                 </div>
+                                <hr/>
+                                <div class="btn-group btn-group-xs btn-group-justified">
+
+                                    <button class="btn btn-xs btn-light" wire:click="showPerson({{$personId}})"
+                                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click"
+                                            title="View person api response"
+                                    ><i
+                                            class="fa fa-eye"></i>
+                                    </button>
+                                    <a class="btn btn-xs btn-light" href="{{route('person.show',$personId)}}"
+                                       target="_blank"
+                                       data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click"
+                                       title="View the api response for this person"
+                                    ><i
+                                            class="fa fa-code"></i>
+                                    </a>
+                                    <a class="btn btn-xs btn-light" href="{{route('person.wookiee',$personId)}}"
+                                       target="_blank"
+                                       data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click"
+                                       title="View the api response for this specific person in Wookiee language"
+                                    ><i
+                                            class="fa fa-code-branch"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="pe-0">
+                            <div class="d-flex align-items-center justify-content-end">
+                                <div class="symbol symbol-30px me-3">
+                                    <img src="{{$result['homeWorldImage']}}" class="" alt="">
+                                </div>
+
+                                <span class="text-gray-600 fw-bold d-block fs-6">{{$result['birthYear'] ?? ''}}</span>
                             </div>
                         </td>
                         <td class="text-end pe-0">
                         <span class="fs-6 text-gray-700 fw-bold">
 								{{$result['birthYear'] ?? ''}}
                         </span>
+
                         </td>
                         <td class="text-end pe-0">
                         <span class="fs-6 text-gray-700 fw-bold">

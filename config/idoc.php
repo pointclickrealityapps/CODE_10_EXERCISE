@@ -51,7 +51,7 @@ return [
     |
      */
 
-    'logo' => 'https://uxwing.com/wp-content/themes/uxwing/download/web-app-development/developer-icon.png',
+    'logo' => config('app.url') . '/assets/media/svg/humans/custom-1.svg',
 
     'color' => '',
 

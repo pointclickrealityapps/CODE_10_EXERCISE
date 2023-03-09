@@ -18,13 +18,12 @@ class PersonResource extends JsonResource
     public function toArray($request)
     {
 
-        $exclude = array(4, 5, 6, 7, 8, 9);
-        while (in_array(($randomNumber = rand(1, 29)), $exclude)) ;
         return [
             'format' => $request['format'],
             // format the url string so that we use the internal app endpoints
             'url' => (string)$this->resource['url'],
-            'image' => (string)'https://cdn3.iconfinder.com/data/icons/picnic/lightsaber' . $randomNumber . '.png',
+            'image' => (string)url('/assets/media/avatars/300-' . rand(1, 30) . '.jpg'),
+            'homeWorldImage' => (string)url('/assets/media/stock/600x400/img-' . rand(1, 80) . '.jpg'),
             'name' => (string)$this->resource['name'],
             'height' => (int)$this->resource['height'],
             'mass' => (int)$this->resource['mass'],
