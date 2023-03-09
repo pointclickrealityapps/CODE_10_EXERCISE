@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\V1\ApiController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,5 +14,4 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-
-Route::get('/', [HomeController::class,'index'])->name('index');
+Route::get('/', [ApiController::class, 'index'])->name('index');
