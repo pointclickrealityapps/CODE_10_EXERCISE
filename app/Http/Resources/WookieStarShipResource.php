@@ -12,37 +12,6 @@ class WookieStarShipResource extends JsonResource
      */
     public function toArray($request)
     {
-        /**
-         * array:18 [▼ // app/Http/Controllers/HomeController.php:145
-         * "whrascwo" => "X-ohahwhrr"
-         * "scoowawoan" => "T-65 X-ohahwhrr"
-         * "scrawhhuwwraoaaohurcworc" => "Iwhoaoosc Coorcakoorcraaoahoowh"
-         * "oaoocao_ahwh_oarcwowaahaoc" => "149999"
-         * "anwowhrraoac" => "12.5"
-         * "scrak_raaoscoocakacworcahwhrr_cakwowowa" => "1050"
-         * "oarcwooh" => "1"
-         * "akraccwowhrrworcc" => "0"
-         * "oararcrroo_oaraakraoaahaoro" => "110"
-         * "oaoowhchuscrarhanwoc" => "1 ohwowoor"
-         * "acroakworcwarcahhowo_rcraaoahwhrr" => "1.0"
-         * "MGLT" => "100"
-         * "caorarccacahak_oaanracc" => "Saorarcwwahrracaoworc"
-         * "akahanooaoc" => array:4 [▼
-         * 0 => "acaoaoakc://cohraakah.wawoho/raakah/akwoooakanwo/1/"
-         * 1 => "acaoaoakc://cohraakah.wawoho/raakah/akwoooakanwo/9/"
-         * 2 => "acaoaoakc://cohraakah.wawoho/raakah/akwoooakanwo/18/"
-         * 3 => "acaoaoakc://cohraakah.wawoho/raakah/akwoooakanwo/19/"
-         * ]
-         * "wwahanscc" => array:3 [▼
-         * 0 => "acaoaoakc://cohraakah.wawoho/raakah/wwahanscc/1/"
-         * 1 => "acaoaoakc://cohraakah.wawoho/raakah/wwahanscc/2/"
-         * 2 => "acaoaoakc://cohraakah.wawoho/raakah/wwahanscc/3/"
-         * ]
-         * "oarcworaaowowa" => "2014-12-12T11:19:05.340000Z"
-         * "wowaahaowowa" => "2014-12-20T21:23:49.886000Z"
-         * "hurcan" => "acaoaoakc://cohraakah.wawoho/raakah/caorarccacahakc/12/"
-         * ]
-         */
         return [
             'requestedFormat' => $request['format'],
             'name' => (string)$this->resource['whrascwo'],

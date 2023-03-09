@@ -17,29 +17,10 @@ class StarShipResource extends JsonResource
      */
     public function toArray($request)
     {
-        /**
-         * "name" => "X-wing"
-         * "model" => "T-65 X-wing"
-         * "manufacturer" => "Incom Corporation"
-         * "cost_in_credits" => "149999"
-         * "length" => "12.5"
-         * "max_atmosphering_speed" => "1050"
-         * "crew" => "1"
-         * "passengers" => "0"
-         * "cargo_capacity" => "110"
-         * "consumables" => "1 week"
-         * "hyperdrive_rating" => "1.0"
-         * "MGLT" => "100"
-         * "starship_class" => "Starfighter"
-         * "pilots" => array:4 [▶]
-         * "films" => array:3 [▶]
-         * "created" => "2014-12-12T11:19:05.340000Z"
-         * "edited" => "2014-12-20T21:23:49.886000Z"
-         * "url" => "https://swapi.dev/api/starships/12/"
-         */
-        $randomNumber = rand(31,36);
+        $exclude = array(35);
+        while (in_array(($randomNumber = rand(31, 36)), $exclude)) ;
         return [
-            'image' => (string) 'https://cdn1.iconfinder.com/data/icons/space-duotone/64/Duotone_Space_ship-' .$randomNumber. '-512.png',
+            'image' => (string)'https://cdn1.iconfinder.com/data/icons/space-duotone/64/Duotone_Space_ship-' . $randomNumber . '-512.png',
             'name' => (string)$this->resource['name'],
             'model' => (string)$this->resource['model'],
             'manufacturer' => (string)$this->resource['manufacturer'],
