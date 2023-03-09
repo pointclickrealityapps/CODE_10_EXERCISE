@@ -2,23 +2,29 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
 use App\Traits\FormatUrl;
+use Illuminate\Http\Resources\Json\JsonResource;
+
 class PersonResource extends JsonResource
 {
     use FormatUrl;
+
     protected string $formattedUrl;
+
     /**
      * @param $request
      * @return array
      */
     public function toArray($request)
     {
-        $randomNumber = random_int(7,30);
+
+        $exclude = array(4, 5, 6, 7, 8, 9);
+        while (in_array(($randomNumber = rand(1, 29)), $exclude)) ;
         return [
+            'format' => $request['format'],
             // format the url string so that we use the internal app endpoints
-            'url' => (string) $this->resource['url'],
-            'image' => (string) 'https://cdn3.iconfinder.com/data/icons/picnic/lightsaber'.$randomNumber.'.png',
+            'url' => (string)$this->resource['url'],
+            'image' => (string)'https://cdn3.iconfinder.com/data/icons/picnic/lightsaber' . $randomNumber . '.png',
             'name' => (string)$this->resource['name'],
             'height' => (int)$this->resource['height'],
             'mass' => (int)$this->resource['mass'],
@@ -33,8 +39,6 @@ class PersonResource extends JsonResource
             'noOfFilms' => (int) count($this->resource['films']),
             'noOfStarShips' => (int)count($this->resource['starships']),
             'noOfVehicles' => (int)count($this->resource['vehicles']),
-            //'starships' => (array)$this->resource['starships'],
-            //'ships' => StarShipResource::collection($this->resource['starships']),
         ];
     }
 }
