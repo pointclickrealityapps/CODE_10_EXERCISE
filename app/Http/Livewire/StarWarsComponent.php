@@ -10,7 +10,6 @@ use App\Traits\FormatUrl;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
-use Symfony\Component\HttpFoundation\Response;
 
 class StarWarsComponent extends Component
 {
@@ -73,11 +72,10 @@ class StarWarsComponent extends Component
             $this->pageCount = Arr::get($response, 'count');
 
             $this->collection = $this->records;
-            $this->success($this->collection, Response::HTTP_OK, $this->message);
+            $this->success($this->collection, $response->status(), $response->reason());
 
         } else {
-            $this->message = 'Issue contacting Star Wars external API, please try again';
-            $this->error($this->collection, Response::HTTP_INTERNAL_SERVER_ERROR, $this->message);
+            $this->error($this->collection, $response->status(), $response->reason());
 
         }
 
@@ -110,8 +108,8 @@ class StarWarsComponent extends Component
         //dd($response, $this->url . $this->searchType .'/' . $personId . "?" . http_build_query($this->queryParams), $this->url . $this->searchType  . $personId . "?" . http_build_query($this->queryParams));
         // if api response fails, return this
         if (!$response->successful()) {
-            $this->message = 'Issue contacting Star Wars external API, please try again';
-            $this->error($this->collection, Response::HTTP_INTERNAL_SERVER_ERROR, $this->message);
+
+            $this->error($this->collection, $response->status(), $response->reason());
         }
         // this is the default action when no format exists
         // lets make the person payload pretty, by using a Resource Class
@@ -131,7 +129,7 @@ class StarWarsComponent extends Component
                         return StarShipResource::make($relatedResponse->json())->resolve();
                     } else {
                         $this->message = 'Issue contacting Star Wars external API, please try again';
-                        $this->error($this->collection, Response::HTTP_INTERNAL_SERVER_ERROR, $this->message);
+                        $this->error($this->collection, $relatedResponse->status(), $relatedResponse->reason());
                     }
                 })
                 // convert starships to array
@@ -145,7 +143,7 @@ class StarWarsComponent extends Component
         $this->personId = $personId;
         $this->person = $this->collection;
 
-        $this->success($this->collection, Response::HTTP_OK, $this->message);
+        $this->success($this->collection, $response->status(), $response->reason());
     }
 
     /**

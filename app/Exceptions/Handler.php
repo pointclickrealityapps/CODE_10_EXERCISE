@@ -3,8 +3,8 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -41,7 +41,7 @@ class Handler extends ExceptionHandler
         $this->renderable(function (NotFoundHttpException $e, $request) {
             if ($request->is('api/v1/*')) {
                 return response()->json([
-                    'message' => 'Sorry, we are unable to find what you are looking for!!',
+                    'message' => 'NOT FOUND',
                     'status' => 404,
                     'data' => [],
                 ], 404);

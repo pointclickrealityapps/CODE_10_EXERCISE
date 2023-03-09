@@ -17,10 +17,9 @@ class StarShipResource extends JsonResource
      */
     public function toArray($request)
     {
-        $exclude = array(35);
-        while (in_array(($randomNumber = rand(31, 36)), $exclude)) ;
+
         return [
-            'image' => (string)'https://cdn1.iconfinder.com/data/icons/space-duotone/64/Duotone_Space_ship-' . $randomNumber . '-512.png',
+            'image' => (string)url('/assets/media/stock/900x600/' . rand(1, 85) . '.jpg'),
             'name' => (string)$this->resource['name'],
             'model' => (string)$this->resource['model'],
             'manufacturer' => (string)$this->resource['manufacturer'],

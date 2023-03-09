@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'v1'], function () {
     Route::get('/', [ApiController::class, 'listPeople'])->name('index');
     Route::get('/people', [ApiController::class, 'listPeople'])->name('person.get');
-    Route::get('/people/{personId}/wookiee', [ApiController::class, 'showPeopleWookieLanguage'])->name('person.wookie');
+    Route::get('/people/{personId}/wookiee', [ApiController::class, 'showPeopleWookieLanguage'])->name('person.wookiee');
     Route::get('/people/{personId}', [ApiController::class, 'showPeople'])->name('person.show');
     Route::get('/films', [ApiController::class, 'listFilms'])->name('films.get');
     Route::get('/films/{film_id}', [ApiController::class, 'showFilms'])->name('films.show');

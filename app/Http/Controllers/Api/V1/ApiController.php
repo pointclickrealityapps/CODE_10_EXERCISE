@@ -26,7 +26,8 @@ class ApiController extends Controller
     public string $url = 'https://swapi.dev/api';
     public string $actualUrl;
     public string $format = '';
-    public mixed $searchType;
+    public mixed $searchType = '/people';
+    public mixed $relatedType = '/starships/';
     public mixed $personDetails = [];
     public mixed $starShipCollection = [];
     public mixed $filmsCollection = [];
@@ -49,12 +50,6 @@ class ApiController extends Controller
      */
     public function index(Request $request): View
     {
-        $this->actualUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $homeTitle = 'Code 10 -  Coding Exercise';
-        $homeShareTitle = 'Code 10 Coding Exercise';
-        $homeDescription = 'This application communicates with StarWars API, the application itself also has a front End component that consumes the api as well';
-        $homeKeywords = 'Developer, Coding, Test, API, Integration, Development, PHP, Laravel, Full Stack';
-
         return view('dashboard.default', []);
     }
 
@@ -74,7 +69,6 @@ class ApiController extends Controller
      */
     public function listPeople(Request $request): JsonResponse
     {
-        $this->searchType = '/people';
         $message = 'Return a collection of persons from Star Wars Galaxy';
 
         $this->queryParams = [
@@ -89,15 +83,15 @@ class ApiController extends Controller
             ->get($this->url . $this->searchType . "?" . http_build_query($this->queryParams));
 
         if (!$response->successful()) {
-            $message = 'Issue contacting Star Wars external API, please try again';
-            return $this->error($this->collection, Response::HTTP_INTERNAL_SERVER_ERROR, $message);
+
+            return $this->error($this->collection, $response->status(), $response->reason());
         }
 
         if ($response->successful() && !empty($response->json())) {
             $this->collection = PersonResource::collection($response->json()['results'])->resolve();
         }
 
-        return $this->success($this->collection, Response::HTTP_OK, $message);
+        return $this->success($this->collection, $response->status(), $response->reason());
     }
 
     /**
@@ -116,19 +110,19 @@ class ApiController extends Controller
      */
     public function showPeople(Request $request, $personId): JsonResponse
     {
+
         $this->queryParams = [
             'format' => $request->get('format'),
         ];
+
         // get the person details by ID & pass queryParams
         $response = Http::withHeaders([
             'Accept' => 'application/json',
         ])
-            ->get($this->url . '/people/' . $personId . "?" . http_build_query($this->queryParams));
-
+            ->get($this->url . $this->searchType . '/' . $personId . "?" . http_build_query($this->queryParams));
         // if api response fails, return this
         if (!$response->successful()) {
-            $message = 'Issue contacting Star Wars external API, please try again';
-            return $this->error($this->collection, Response::HTTP_INTERNAL_SERVER_ERROR, $message);
+            return $this->error($this->collection, $response->status(), $response->reason());
         }
 
         // check to see if the format param exists, so that we use the WookiePerson & WookieStarShip resource classes instead
@@ -149,15 +143,15 @@ class ApiController extends Controller
                         // get details on each starship
                         $relatedResponse = Http::withHeaders([
                             'Accept' => 'application/json',
-                        ])->get($this->url . '/starships/' . $starShipId . "?" . http_build_query($this->queryParams));
+                        ])->get($this->url . $this->relatedType . $starShipId . "?" . http_build_query($this->queryParams));
 
                         if ($relatedResponse->successful() && !is_null($relatedResponse->json())) {
                             // return the resource that is in WOokie format
                             return WookieStarShipResource::make($relatedResponse->json())->resolve();
 
                         } else {
-                            $message = 'Issue contacting Star Wars external API, please try again';
-                            return $this->error($this->collection, Response::HTTP_INTERNAL_SERVER_ERROR, $message);
+
+                            return $this->error($this->collection, $relatedResponse->status(), $relatedResponse->reason());
                         }
                     })
                     // convert starships to array
@@ -175,14 +169,14 @@ class ApiController extends Controller
                     ->map(function ($starshipUrl) {
                         $relatedResponse = Http::withHeaders([
                             'Accept' => 'application/json',
-                        ])->get($starshipUrl);
+                        ])->get((string)$starshipUrl);
 
                         // return a new starShip resource when endpoint is hit, else return error
                         if ($relatedResponse->successful() && !is_null($relatedResponse->json())) {
                             return StarShipResource::make($relatedResponse->json())->resolve();
                         } else {
-                            $message = 'Issue contacting Star Wars external API, please try again';
-                            return $this->error($this->collection, Response::HTTP_INTERNAL_SERVER_ERROR, $message);
+
+                            return $this->error($this->collection, $relatedResponse->status(), $relatedResponse->reason());
                         }
                     })
                     // convert starships to array
@@ -193,7 +187,7 @@ class ApiController extends Controller
         $this->collection = collect($this->personDetails)
             ->merge(['starships' => $this->starShipCollection]);
 
-        return $this->success($this->collection, Response::HTTP_OK, $message);
+        return $this->success($this->collection, $response->status(), $response->reason());
 
     }
 
@@ -230,8 +224,7 @@ class ApiController extends Controller
 
         // if api response fails, return this
         if (!$response->successful()) {
-            $message = 'Issue contacting Star Wars external API, please try again';
-            return $this->error($this->collection, Response::HTTP_INTERNAL_SERVER_ERROR, $message);
+            return $this->error($this->collection, $response->status(), $response->reason());
         }
 
         // check to see if the format param exists, so that we use the WookiePerson & WookieStarShip resource classes instead
@@ -256,8 +249,8 @@ class ApiController extends Controller
                             return WookieStarShipResource::make($relatedResponse->json())->resolve();
 
                         } else {
-                            $message = 'Issue contacting Star Wars external API, please try again';
-                            return $this->error($this->collection, Response::HTTP_INTERNAL_SERVER_ERROR, $message);
+
+                            return $this->error($this->collection, $relatedResponse->status(), $relatedResponse->reason());
                         }
                     })
                     // convert starships to array
@@ -269,7 +262,7 @@ class ApiController extends Controller
         $this->collection = collect($this->personDetails)
             ->merge(['starships' => $this->starShipCollection]);
 
-        return $this->success($this->collection, Response::HTTP_OK, $message);
+        return $this->success($this->collection, $response->status(), $response->reason());
     }
 
     /**
@@ -299,15 +292,15 @@ class ApiController extends Controller
         ])->get($this->url . $this->searchType . "?" . http_build_query($this->queryParams));
 
         if (!$response->successful()) {
-            $message = 'Issue contacting Star Wars external API, please try again';
-            return $this->error($this->collection, Response::HTTP_INTERNAL_SERVER_ERROR, $message);
+
+            return $this->error($this->collection, $response->status(), $response->reason());
         }
 
         if (count($response['results'])) {
             $this->collection = FilmCollection::make($response['results'])->resolve();
         }
 
-        return $this->success($this->collection, Response::HTTP_OK, $message);
+        return $this->success($this->collection, $response->status(), $response->reason());
     }
 
 
@@ -338,8 +331,8 @@ class ApiController extends Controller
         ])->get($this->url . $this->searchType . $filmId . "?" . http_build_query($this->queryParams));
 
         if (!$response->successful()) {
-            $message = 'Issue contacting Star Wars external API, please try again';
-            return $this->error($this->collection, Response::HTTP_INTERNAL_SERVER_ERROR, $message);
+
+            return $this->error($this->collection, $response->status(), $response->reason());
         }
 
         $this->filmsCollection = FilmResource::make($response->json())->resolve();
@@ -357,8 +350,8 @@ class ApiController extends Controller
                         return SpeciesResource::make($relatedResponse->json())->resolve();
                     } else {
 
-                        $message = 'Issue contacting Star Wars external API, please try again';
-                        return $this->error($this->collection, Response::HTTP_INTERNAL_SERVER_ERROR, $message);
+
+                        return $this->error($this->collection, $relatedResponse->status(), $relatedResponse->reason());
                     }
                 })
                 // filter out duplicates as some names have same classification name
@@ -370,7 +363,7 @@ class ApiController extends Controller
         $this->collection = collect($this->filmsCollection)
             ->merge(['species' => $this->speciesCollection]);
 
-        return $this->success($this->collection, Response::HTTP_OK, $message);
+        return $this->success($this->collection, $response->status(), $response->reason());
     }
 
     /**
@@ -402,8 +395,8 @@ class ApiController extends Controller
 
         // we need to ensure each fetch was successful else we throw error, since we need all planets on all pages
         if (!$responses[1]->ok() || !$responses[2]->ok() || !$responses[3]->ok() || !$responses[4]->ok() || !$responses[5]->ok() || !$responses[6]->ok()) {
-            $message = 'Issue contacting Star Wars external API, please try again';
-            return $this->error($this->collection, Response::HTTP_INTERNAL_SERVER_ERROR, $message);
+
+            return $this->error($this->collection, Response::HTTP_NOT_FOUND, Response::$statusTexts[Response::HTTP_NOT_FOUND]);
         }
 
         // merge each response into a single collection
@@ -435,6 +428,6 @@ class ApiController extends Controller
             'noOfPlanetsWithWithPopulation' => (int)count($filteredData),
         ];
 
-        return $this->success($this->collection, Response::HTTP_OK, $message);
+        return $this->success($this->collection, Response::HTTP_OK, Response::$statusTexts[Response::HTTP_OK]);
     }
 }
