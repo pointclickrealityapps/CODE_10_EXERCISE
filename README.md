@@ -52,7 +52,7 @@ From the root of your project you will need to use the terminal. There are only 
 started using app.
 Please follow steps below
 
-### Install Composer Packages - Step 2
+### Install Composer Packages - Step 1
 
 Once you have the app installed, please open your terminal or your preferred Command Line Interface & enter the
 following command in project root.
@@ -61,21 +61,21 @@ following command in project root.
 composer install
 ```
 
-### Add Application Key - Step 3
-
-You need to generate a key for your application. Lets generate your key by running the command below
-
-```angular2html
-php artisan key:generate
-```
-
-### Add .env file - Step 4
+### Add .env file - Step 2
 
 > Although we do are not creating a db connection, we need our `.env` file in order to run our lravel app. We only need
 > to run the below command in order to do this
 
 ```angular2html
 cp .env.example .env
+```
+
+### Add Application Key - Step 3
+
+You need to generate a key for your application. Lets generate your key by running the command below
+
+```angular2html
+php artisan key:generate
 ```
 
 ##### Now that we have added our application key, we can now get started interacting with our API. Lets get started!!
