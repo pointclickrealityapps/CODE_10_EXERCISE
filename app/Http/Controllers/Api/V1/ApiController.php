@@ -26,7 +26,8 @@ class ApiController extends Controller
     public string $url = 'https://swapi.dev/api';
     public string $actualUrl;
     public string $format = '';
-    public mixed $searchType;
+    public mixed $searchType = '/people';
+    public mixed $relatedType = '/starships/';
     public mixed $personDetails = [];
     public mixed $starShipCollection = [];
     public mixed $filmsCollection = [];
@@ -49,12 +50,6 @@ class ApiController extends Controller
      */
     public function index(Request $request): View
     {
-        $this->actualUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $homeTitle = 'Code 10 -  Coding Exercise';
-        $homeShareTitle = 'Code 10 Coding Exercise';
-        $homeDescription = 'This application communicates with StarWars API, the application itself also has a front End component that consumes the api as well';
-        $homeKeywords = 'Developer, Coding, Test, API, Integration, Development, PHP, Laravel, Full Stack';
-
         return view('dashboard.default', []);
     }
 
@@ -74,7 +69,6 @@ class ApiController extends Controller
      */
     public function listPeople(Request $request): JsonResponse
     {
-        $this->searchType = '/people';
         $message = 'Return a collection of persons from Star Wars Galaxy';
 
         $this->queryParams = [
@@ -116,14 +110,16 @@ class ApiController extends Controller
      */
     public function showPeople(Request $request, $personId): JsonResponse
     {
+
         $this->queryParams = [
             'format' => $request->get('format'),
         ];
+
         // get the person details by ID & pass queryParams
         $response = Http::withHeaders([
             'Accept' => 'application/json',
         ])
-            ->get($this->url . '/people/' . $personId . "?" . http_build_query($this->queryParams));
+            ->get($this->url . $this->searchType . '/' . $personId . "?" . http_build_query($this->queryParams));
 
         // if api response fails, return this
         if (!$response->successful()) {
@@ -149,7 +145,7 @@ class ApiController extends Controller
                         // get details on each starship
                         $relatedResponse = Http::withHeaders([
                             'Accept' => 'application/json',
-                        ])->get($this->url . '/starships/' . $starShipId . "?" . http_build_query($this->queryParams));
+                        ])->get($this->url . $this->relatedType . $starShipId . "?" . http_build_query($this->queryParams));
 
                         if ($relatedResponse->successful() && !is_null($relatedResponse->json())) {
                             // return the resource that is in WOokie format
@@ -175,7 +171,7 @@ class ApiController extends Controller
                     ->map(function ($starshipUrl) {
                         $relatedResponse = Http::withHeaders([
                             'Accept' => 'application/json',
-                        ])->get($starshipUrl);
+                        ])->get((string)$starshipUrl);
 
                         // return a new starShip resource when endpoint is hit, else return error
                         if ($relatedResponse->successful() && !is_null($relatedResponse->json())) {

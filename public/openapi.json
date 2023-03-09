@@ -1,0 +1,556 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Star Wars API + Laravel Livewire Code10 Coding Exercise",
+        "version": "1.0",
+        "description": "Api specification and documentation for how this app interacts with StarWars API.",
+        "termsOfService": "",
+        "license": null,
+        "contact": {
+            "name": "JD Hawkins",
+            "email": "itssimplescience@gmail.com"
+        },
+        "x-logo": {
+            "url": "https:\/\/uxwing.com\/wp-content\/themes\/uxwing\/download\/web-app-development\/developer-icon.png",
+            "altText": "Star Wars API + Laravel Livewire Code10 Coding Exercise",
+            "backgroundColor": ""
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": []
+    },
+    "servers": [
+        {
+            "url": "https:\/\/code-10-assignment.itssimplescience.com:8890",
+            "description": "Documentation generator server."
+        }
+    ],
+    "paths": {
+        "\/api\/v1\/people": {
+            "get": {
+                "tags": [
+                    "Person API Specification"
+                ],
+                "operationId": "List persons",
+                "description": "Fetch paginated collection of persons\nconvert items into a PersonResourceCollection",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "description": "allows you to search results by provided param.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Darth Maul"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "description": "allows you to set the current page.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "code": "OK",
+                                        "message": "Return a collection of persons from Star Wars Galaxy",
+                                        "status": 200,
+                                        "data": [
+                                            {
+                                                "format": null,
+                                                "url": "https:\/\/swapi.dev\/api\/people\/44\/",
+                                                "image": "https:\/\/cdn3.iconfinder.com\/data\/icons\/picnic\/lightsaber24.png",
+                                                "name": "Darth Maul",
+                                                "height": 175,
+                                                "mass": 80,
+                                                "hairColor": "none",
+                                                "skinColor": "red",
+                                                "eyeColor": "yellow",
+                                                "birthYear": "54BBY",
+                                                "gender": "male",
+                                                "homeWorld": "https:\/\/swapi.dev\/api\/planets\/36\/",
+                                                "createdOn": "2014-12-19T18:00:41.929000Z",
+                                                "editedOn": "2014-12-20T21:17:50.403000Z",
+                                                "noOfFilms": 1,
+                                                "noOfStarShips": 1,
+                                                "noOfVehicles": 1
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-code-samples": [
+                    {
+                        "lang": "Bash",
+                        "source": "curl -X GET -G \"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/people\" \n"
+                    },
+                    {
+                        "lang": "Javascript",
+                        "source": "const url = new URL(\"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/people\");\n\nlet params = {\n    \"search\": \"Darth Maul\",\n    \"page\": \"1\",\n};\n\nObject.keys(params).forEach(key => url.searchParams.append(key, params[key]));\n\nlet headers = {\n    \"Accept\": \"application\/json\",\n    \"Content-Type\": \"application\/json\",\n}\n\nfetch(url, {\n    method: \"GET\",\n    headers: headers,\n})\n    .then(response => response.json())\n    .then(json => console.log(json));\n"
+                    },
+                    {
+                        "lang": "PHP",
+                        "source": "$headers = [\n    \"Accept\" => \"application\/json\",\n    \"Content-Type\" => \"application\/json\",\n];\n\n$query = [\n    \"search\" => \"Darth Maul\",\n    \"page\" => \"1\",\n];\n\n\n$ch = curl_init(\"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/people?\" . http_build_query($data));\ncurl_setopt($ch, CURLOPT_HTTPHEADER, $headers);\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, true);\n\n$result = curl_exec($ch);\n$err = curl_error($ch);\ncurl_close($ch);\n\nif ($err) {\n  throw \\Exception($err);\n} else {\n  return $response;\n}\n"
+                    }
+                ]
+            }
+        },
+        "\/api\/v1\/people\/{personId}": {
+            "get": {
+                "tags": [
+                    "Person API Specification"
+                ],
+                "operationId": "Show person",
+                "description": "Fetch the details of a single PersonResource\nfetch all StarShipResource related to person",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "personId",
+                        "description": "The id of the person object.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 17
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "code": "OK",
+                                        "message": "Return person details from external API for Luke Skywalker. Convert API response to a custom PersonResource, we also get the details for each starship and convert it to a StarShipResource, as well as count of films, vehicles, & starships for person. We then merge all the resources together & return a person object that also has the details of each starship",
+                                        "status": 200,
+                                        "data": {
+                                            "format": null,
+                                            "url": "https:\/\/swapi.dev\/api\/people\/1\/",
+                                            "image": "https:\/\/cdn3.iconfinder.com\/data\/icons\/picnic\/lightsaber20.png",
+                                            "name": "Luke Skywalker",
+                                            "height": 172,
+                                            "mass": 77,
+                                            "hairColor": "blond",
+                                            "skinColor": "fair",
+                                            "eyeColor": "blue",
+                                            "birthYear": "19BBY",
+                                            "gender": "male",
+                                            "homeWorld": "https:\/\/swapi.dev\/api\/planets\/1\/",
+                                            "createdOn": "2014-12-09T13:50:51.644000Z",
+                                            "editedOn": "2014-12-20T21:17:56.891000Z",
+                                            "noOfFilms": 4,
+                                            "noOfStarShips": 2,
+                                            "noOfVehicles": 2,
+                                            "starships": [
+                                                {
+                                                    "image": "https:\/\/cdn1.iconfinder.com\/data\/icons\/space-duotone\/64\/Duotone_Space_ship-32-512.png",
+                                                    "name": "X-wing",
+                                                    "model": "T-65 X-wing",
+                                                    "manufacturer": "Incom Corporation",
+                                                    "cost_in_credits": 149999,
+                                                    "length": 12,
+                                                    "max_atmosphering_speed": 1050,
+                                                    "crew": 1,
+                                                    "passengers": 0,
+                                                    "cargo_capacity": 110,
+                                                    "consumables": "1 week",
+                                                    "hyperdrive_rating": 1,
+                                                    "starship_class": "Starfighter",
+                                                    "created": "2014-12-12T11:19:05.340000Z",
+                                                    "edited": "2014-12-20T21:23:49.886000Z",
+                                                    "url": "https:\/\/swapi.dev\/api\/starships\/12\/"
+                                                },
+                                                {
+                                                    "image": "https:\/\/cdn1.iconfinder.com\/data\/icons\/space-duotone\/64\/Duotone_Space_ship-34-512.png",
+                                                    "name": "Imperial shuttle",
+                                                    "model": "Lambda-class T-4a shuttle",
+                                                    "manufacturer": "Sienar Fleet Systems",
+                                                    "cost_in_credits": 240000,
+                                                    "length": 20,
+                                                    "max_atmosphering_speed": 850,
+                                                    "crew": 6,
+                                                    "passengers": 20,
+                                                    "cargo_capacity": 80000,
+                                                    "consumables": "2 months",
+                                                    "hyperdrive_rating": 1,
+                                                    "starship_class": "Armed government transport",
+                                                    "created": "2014-12-15T13:04:47.235000Z",
+                                                    "edited": "2014-12-20T21:23:49.900000Z",
+                                                    "url": "https:\/\/swapi.dev\/api\/starships\/22\/"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-code-samples": [
+                    {
+                        "lang": "Bash",
+                        "source": "curl -X GET -G \"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/people\/{personId}\" \n"
+                    },
+                    {
+                        "lang": "Javascript",
+                        "source": "const url = new URL(\"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/people\/{personId}\");\n\nlet headers = {\n    \"Accept\": \"application\/json\",\n    \"Content-Type\": \"application\/json\",\n}\n\nfetch(url, {\n    method: \"GET\",\n    headers: headers,\n})\n    .then(response => response.json())\n    .then(json => console.log(json));\n"
+                    },
+                    {
+                        "lang": "PHP",
+                        "source": "$headers = [\n    \"Accept\" => \"application\/json\",\n    \"Content-Type\" => \"application\/json\",\n];\n\n\n$ch = curl_init(\"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/people\/{personId}\");\ncurl_setopt($ch, CURLOPT_HTTPHEADER, $headers);\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, true);\n\n$result = curl_exec($ch);\n$err = curl_error($ch);\ncurl_close($ch);\n\nif ($err) {\n  throw \\Exception($err);\n} else {\n  return $response;\n}\n"
+                    }
+                ]
+            }
+        },
+        "\/api\/v1\/people\/{personId}\/wookiee": {
+            "get": {
+                "tags": [
+                    "Wookie Format API Specification"
+                ],
+                "operationId": "Person in Wookiee Language",
+                "description": "Fetch the details of a single PersonResource\nfetch all StarShipResource related to person\nreturn payload in Wookie Language Format",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "format",
+                        "description": "converts response to wookiee format, remove this value to see normal response.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "wookiee"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "personId",
+                        "description": "The id of the person object.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "code": "OK",
+                                        "message": "Return output in Wookiee format",
+                                        "status": 200,
+                                        "data": {
+                                            "format": "wookiee",
+                                            "name": "Lhuorwo Sorroohraanorworc",
+                                            "height": 172,
+                                            "mass": 77,
+                                            "hairColor": "rhanoowhwa",
+                                            "skinColor": "wwraahrc",
+                                            "eyeColor": "rhanhuwo",
+                                            "birthYear": "19BBY",
+                                            "gender": "scraanwo",
+                                            "homeWorld": "acaoaoakc:\/\/cohraakah.wawoho\/raakah\/akanrawhwoaoc\/1\/",
+                                            "url": "acaoaoakc:\/\/cohraakah.wawoho\/raakah\/akwoooakanwo\/1\/",
+                                            "starships": [
+                                                {
+                                                    "requestedFormat": "wookiee",
+                                                    "name": "X-ohahwhrr",
+                                                    "model": "T-65 X-ohahwhrr",
+                                                    "manufacturer": "Iwhoaoosc Coorcakoorcraaoahoowh",
+                                                    "cost_in_credits": 149999,
+                                                    "length": 12,
+                                                    "max_atmosphering_speed": 1050,
+                                                    "crew": 1,
+                                                    "passengers": 0,
+                                                    "cargo_capacity": 110,
+                                                    "consumables": "1 ohwowoor",
+                                                    "hyperdrive_rating": 1,
+                                                    "starship_class": "Saorarcwwahrracaoworc",
+                                                    "created": "2014-12-12T11:19:05.340000Z",
+                                                    "edited": "2014-12-20T21:23:49.886000Z",
+                                                    "url": "acaoaoakc:\/\/cohraakah.wawoho\/raakah\/caorarccacahakc\/12\/"
+                                                },
+                                                {
+                                                    "requestedFormat": "wookiee",
+                                                    "name": "Iscakworcahraan cachuaoaoanwo",
+                                                    "model": "Lrascrhwara-oaanracc T-4ra cachuaoaoanwo",
+                                                    "manufacturer": "Sahwowhrarc Fanwowoao Srocaowoscc",
+                                                    "cost_in_credits": 240000,
+                                                    "length": 20,
+                                                    "max_atmosphering_speed": 850,
+                                                    "crew": 6,
+                                                    "passengers": 20,
+                                                    "cargo_capacity": 80000,
+                                                    "consumables": "2 scoowhaoacc",
+                                                    "hyperdrive_rating": 1,
+                                                    "starship_class": "Arcscwowa rroohoworcwhscwowhao aorcrawhcakoorcao",
+                                                    "created": "2014-12-15T13:04:47.235000Z",
+                                                    "edited": "2014-12-20T21:23:49.900000Z",
+                                                    "url": "acaoaoakc:\/\/cohraakah.wawoho\/raakah\/caorarccacahakc\/22\/"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-code-samples": [
+                    {
+                        "lang": "Bash",
+                        "source": "curl -X GET -G \"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/people\/{personId}\/wookiee\" \n"
+                    },
+                    {
+                        "lang": "Javascript",
+                        "source": "const url = new URL(\"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/people\/{personId}\/wookiee\");\n\nlet params = {\n    \"format\": \"wookiee\",\n};\n\nObject.keys(params).forEach(key => url.searchParams.append(key, params[key]));\n\nlet headers = {\n    \"Accept\": \"application\/json\",\n    \"Content-Type\": \"application\/json\",\n}\n\nfetch(url, {\n    method: \"GET\",\n    headers: headers,\n})\n    .then(response => response.json())\n    .then(json => console.log(json));\n"
+                    },
+                    {
+                        "lang": "PHP",
+                        "source": "$headers = [\n    \"Accept\" => \"application\/json\",\n    \"Content-Type\" => \"application\/json\",\n];\n\n$query = [\n    \"format\" => \"wookiee\",\n];\n\n\n$ch = curl_init(\"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/people\/{personId}\/wookiee?\" . http_build_query($data));\ncurl_setopt($ch, CURLOPT_HTTPHEADER, $headers);\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, true);\n\n$result = curl_exec($ch);\n$err = curl_error($ch);\ncurl_close($ch);\n\nif ($err) {\n  throw \\Exception($err);\n} else {\n  return $response;\n}\n"
+                    }
+                ]
+            }
+        },
+        "\/api\/v1\/films": {
+            "get": {
+                "tags": [
+                    "Film API Specification"
+                ],
+                "operationId": "List Films",
+                "description": "Fetch paginated collection of films\nconvert items into a FilmsResourceCollection",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "description": "allows you to search a film.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "A New Hope"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "code": "OK",
+                                        "message": "Return a list of all films",
+                                        "status": 200,
+                                        "data": {
+                                            "films": [
+                                                {
+                                                    "format": null,
+                                                    "image": "https:\/\/cdn2.iconfinder.com\/data\/icons\/space-filled-outline-6\/128\/Space_-_Filled_Outline_-_38-13-512.png",
+                                                    "title": "A New Hope",
+                                                    "episodeId": 4,
+                                                    "opening_crawl": "It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.\r\n\r\nDuring the battle, Rebel\r\nspies managed to steal secret\r\nplans to the Empire's\r\nultimate weapon, the DEATH\r\nSTAR, an armored space\r\nstation with enough power\r\nto destroy an entire planet.\r\n\r\nPursued by the Empire's\r\nsinister agents, Princess\r\nLeia races home aboard her\r\nstarship, custodian of the\r\nstolen plans that can save her\r\npeople and restore\r\nfreedom to the galaxy....",
+                                                    "director": "George Lucas",
+                                                    "producer": "Gary Kurtz, Rick McCallum",
+                                                    "release_date": "1977-05-25",
+                                                    "created": "2014-12-10T14:23:31.880000Z",
+                                                    "edited": "2014-12-20T19:49:45.256000Z",
+                                                    "url": "https:\/\/swapi.dev\/api\/films\/1\/",
+                                                    "totalSpeciesCount": 5
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-code-samples": [
+                    {
+                        "lang": "Bash",
+                        "source": "curl -X GET -G \"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/films\" \n"
+                    },
+                    {
+                        "lang": "Javascript",
+                        "source": "const url = new URL(\"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/films\");\n\nlet params = {\n    \"search\": \"A New Hope\",\n};\n\nObject.keys(params).forEach(key => url.searchParams.append(key, params[key]));\n\nlet headers = {\n    \"Accept\": \"application\/json\",\n    \"Content-Type\": \"application\/json\",\n}\n\nfetch(url, {\n    method: \"GET\",\n    headers: headers,\n})\n    .then(response => response.json())\n    .then(json => console.log(json));\n"
+                    },
+                    {
+                        "lang": "PHP",
+                        "source": "$headers = [\n    \"Accept\" => \"application\/json\",\n    \"Content-Type\" => \"application\/json\",\n];\n\n$query = [\n    \"search\" => \"A New Hope\",\n];\n\n\n$ch = curl_init(\"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/films?\" . http_build_query($data));\ncurl_setopt($ch, CURLOPT_HTTPHEADER, $headers);\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, true);\n\n$result = curl_exec($ch);\n$err = curl_error($ch);\ncurl_close($ch);\n\nif ($err) {\n  throw \\Exception($err);\n} else {\n  return $response;\n}\n"
+                    }
+                ]
+            }
+        },
+        "\/api\/v1\/films\/{film_id}": {
+            "get": {
+                "tags": [
+                    "Film API Specification"
+                ],
+                "operationId": "Show a film",
+                "description": "Get a single film from external API,\nconvert the payload into a FilmResource,\nfetch all related species and merge w associated film",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "filmId",
+                        "description": "The id of the film object.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "code": "OK",
+                                        "message": "Return the classification of all species in the Episode # 4 - A New Hope",
+                                        "status": 200,
+                                        "data": {
+                                            "format": null,
+                                            "image": "https:\/\/cdn2.iconfinder.com\/data\/icons\/space-filled-outline-6\/128\/Space_-_Filled_Outline_-_38-21-512.png",
+                                            "title": "A New Hope",
+                                            "episodeId": 4,
+                                            "opening_crawl": "It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.\r\n\r\nDuring the battle, Rebel\r\nspies managed to steal secret\r\nplans to the Empire's\r\nultimate weapon, the DEATH\r\nSTAR, an armored space\r\nstation with enough power\r\nto destroy an entire planet.\r\n\r\nPursued by the Empire's\r\nsinister agents, Princess\r\nLeia races home aboard her\r\nstarship, custodian of the\r\nstolen plans that can save her\r\npeople and restore\r\nfreedom to the galaxy....",
+                                            "director": "George Lucas",
+                                            "producer": "Gary Kurtz, Rick McCallum",
+                                            "release_date": "1977-05-25",
+                                            "created": "2014-12-10T14:23:31.880000Z",
+                                            "edited": "2014-12-20T19:49:45.256000Z",
+                                            "url": "https:\/\/swapi.dev\/api\/films\/1\/",
+                                            "totalSpeciesCount": 5,
+                                            "species": [
+                                                {
+                                                    "classification": "mammal",
+                                                    "created": "2014-12-10T13:52:11.567000Z",
+                                                    "edited": "2014-12-20T21:36:42.136000Z",
+                                                    "url": "https:\/\/swapi.dev\/api\/species\/1\/"
+                                                },
+                                                {
+                                                    "classification": "artificial",
+                                                    "created": "2014-12-10T15:16:16.259000Z",
+                                                    "edited": "2014-12-20T21:36:42.139000Z",
+                                                    "url": "https:\/\/swapi.dev\/api\/species\/2\/"
+                                                },
+                                                {
+                                                    "classification": "mammal",
+                                                    "created": "2014-12-10T16:44:31.486000Z",
+                                                    "edited": "2014-12-20T21:36:42.142000Z",
+                                                    "url": "https:\/\/swapi.dev\/api\/species\/3\/"
+                                                },
+                                                {
+                                                    "classification": "sentient",
+                                                    "created": "2014-12-10T17:05:26.471000Z",
+                                                    "edited": "2014-12-20T21:36:42.144000Z",
+                                                    "url": "https:\/\/swapi.dev\/api\/species\/4\/"
+                                                },
+                                                {
+                                                    "classification": "gastropod",
+                                                    "created": "2014-12-10T17:12:50.410000Z",
+                                                    "edited": "2014-12-20T21:36:42.146000Z",
+                                                    "url": "https:\/\/swapi.dev\/api\/species\/5\/"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-code-samples": [
+                    {
+                        "lang": "Bash",
+                        "source": "curl -X GET -G \"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/films\/{film_id}\" \n"
+                    },
+                    {
+                        "lang": "Javascript",
+                        "source": "const url = new URL(\"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/films\/{film_id}\");\n\nlet headers = {\n    \"Accept\": \"application\/json\",\n    \"Content-Type\": \"application\/json\",\n}\n\nfetch(url, {\n    method: \"GET\",\n    headers: headers,\n})\n    .then(response => response.json())\n    .then(json => console.log(json));\n"
+                    },
+                    {
+                        "lang": "PHP",
+                        "source": "$headers = [\n    \"Accept\" => \"application\/json\",\n    \"Content-Type\" => \"application\/json\",\n];\n\n\n$ch = curl_init(\"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/films\/{film_id}\");\ncurl_setopt($ch, CURLOPT_HTTPHEADER, $headers);\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, true);\n\n$result = curl_exec($ch);\n$err = curl_error($ch);\ncurl_close($ch);\n\nif ($err) {\n  throw \\Exception($err);\n} else {\n  return $response;\n}\n"
+                    }
+                ]
+            }
+        },
+        "\/api\/v1\/galaxy": {
+            "get": {
+                "tags": [
+                    "Planet API Specification"
+                ],
+                "operationId": "Population API Specification",
+                "description": "Returns the total population for all planets in galaxy.\nFunction also removes all planets that have an unknown population as we are unable to get a count of those planets\nSum the population of all planets that have a population",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "code": "OK",
+                                        "message": "We fetch all planets from all pages for StarWars Galaxy, merges all requests, remove unknown populations (not-integer). Sum population of all remaining planets. Return total count of planets that have population",
+                                        "status": 200,
+                                        "data": {
+                                            "totalGalacticPopulation": 1711401432500,
+                                            "noOfPlanetsWithWithPopulation": 43
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-code-samples": [
+                    {
+                        "lang": "Bash",
+                        "source": "curl -X GET -G \"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/galaxy\" \n"
+                    },
+                    {
+                        "lang": "Javascript",
+                        "source": "const url = new URL(\"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/galaxy\");\n\nlet headers = {\n    \"Accept\": \"application\/json\",\n    \"Content-Type\": \"application\/json\",\n}\n\nfetch(url, {\n    method: \"GET\",\n    headers: headers,\n})\n    .then(response => response.json())\n    .then(json => console.log(json));\n"
+                    },
+                    {
+                        "lang": "PHP",
+                        "source": "$headers = [\n    \"Accept\" => \"application\/json\",\n    \"Content-Type\" => \"application\/json\",\n];\n\n\n$ch = curl_init(\"https:\/\/code-10-assignment.itssimplescience.com:8890\/api\/v1\/galaxy\");\ncurl_setopt($ch, CURLOPT_HTTPHEADER, $headers);\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, true);\n\n$result = curl_exec($ch);\n$err = curl_error($ch);\ncurl_close($ch);\n\nif ($err) {\n  throw \\Exception($err);\n} else {\n  return $response;\n}\n"
+                    }
+                ]
+            }
+        }
+    },
+    "x-tagGroups": []
+}
