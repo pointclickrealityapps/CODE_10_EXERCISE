@@ -46,11 +46,11 @@ to download this project, run a few artisan commands, & you are able to hit the 
 page loads. Pretty simple right?
 Lets get started.
 
-### CLI
+### Command Line
 
-From the root of your project you will need to use the terminal. There are only two steps required before you can get
-started using app.
-Please follow steps below
+>From the root of your project you will need to use the terminal. There are only two steps required before you can get
+>started using app.
+>Please follow steps below
 
 ### Install Composer Packages - Step 1
 
