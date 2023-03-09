@@ -153,8 +153,8 @@
                 How we generate the list of starship details below is first check whether starships exist for the person
                 object, then we get fetch the details of each
                 starship & convert it into a StarShipResource.
-                This allows us to return all of the details from the starship endpoint although this data is not
-                initially available on the person object returned from orginal payload.
+                This allows us to return all relevant details from the starship endpoint although this data is not
+                initially available on the person object returned from original payload.
                 Cool right?
             </p>
         </div>

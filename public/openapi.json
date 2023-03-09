@@ -11,7 +11,7 @@
             "email": "itssimplescience@gmail.com"
         },
         "x-logo": {
-            "url": "https:\/\/uxwing.com\/wp-content\/themes\/uxwing\/download\/web-app-development\/developer-icon.png",
+            "url": "https:\/\/code-10-assignment.itssimplescience.com:8890\/assets\/media\/svg\/humans\/custom-1.svg",
             "altText": "Star Wars API + Laravel Livewire Code10 Coding Exercise",
             "backgroundColor": ""
         }
@@ -70,14 +70,15 @@
                                 "schema": {
                                     "type": "object",
                                     "example": {
-                                        "code": "OK",
-                                        "message": "Return a collection of persons from Star Wars Galaxy",
-                                        "status": 200,
+                                        "code": 200,
+                                        "status": "OK",
+                                        "message": "OK",
                                         "data": [
                                             {
                                                 "format": null,
                                                 "url": "https:\/\/swapi.dev\/api\/people\/44\/",
-                                                "image": "https:\/\/cdn3.iconfinder.com\/data\/icons\/picnic\/lightsaber24.png",
+                                                "image": "http:\/\/localhost\/assets\/media\/avatars\/300-8.jpg",
+                                                "homeWorldImage": "http:\/\/localhost\/assets\/media\/stock\/600x400\/img-36.jpg",
                                                 "name": "Darth Maul",
                                                 "height": 175,
                                                 "mass": 80,
@@ -143,13 +144,14 @@
                                 "schema": {
                                     "type": "object",
                                     "example": {
-                                        "code": "OK",
-                                        "message": "Return person details from external API for Luke Skywalker. Convert API response to a custom PersonResource, we also get the details for each starship and convert it to a StarShipResource, as well as count of films, vehicles, & starships for person. We then merge all the resources together & return a person object that also has the details of each starship",
-                                        "status": 200,
+                                        "code": 200,
+                                        "status": "OK",
+                                        "message": "OK",
                                         "data": {
                                             "format": null,
                                             "url": "https:\/\/swapi.dev\/api\/people\/1\/",
-                                            "image": "https:\/\/cdn3.iconfinder.com\/data\/icons\/picnic\/lightsaber20.png",
+                                            "image": "http:\/\/localhost\/assets\/media\/avatars\/300-8.jpg",
+                                            "homeWorldImage": "http:\/\/localhost\/assets\/media\/stock\/600x400\/img-48.jpg",
                                             "name": "Luke Skywalker",
                                             "height": 172,
                                             "mass": 77,
@@ -166,7 +168,7 @@
                                             "noOfVehicles": 2,
                                             "starships": [
                                                 {
-                                                    "image": "https:\/\/cdn1.iconfinder.com\/data\/icons\/space-duotone\/64\/Duotone_Space_ship-32-512.png",
+                                                    "image": "http:\/\/localhost\/assets\/media\/stock\/900x600\/4.jpg",
                                                     "name": "X-wing",
                                                     "model": "T-65 X-wing",
                                                     "manufacturer": "Incom Corporation",
@@ -184,7 +186,7 @@
                                                     "url": "https:\/\/swapi.dev\/api\/starships\/12\/"
                                                 },
                                                 {
-                                                    "image": "https:\/\/cdn1.iconfinder.com\/data\/icons\/space-duotone\/64\/Duotone_Space_ship-34-512.png",
+                                                    "image": "http:\/\/localhost\/assets\/media\/stock\/900x600\/67.jpg",
                                                     "name": "Imperial shuttle",
                                                     "model": "Lambda-class T-4a shuttle",
                                                     "manufacturer": "Sienar Fleet Systems",
@@ -262,9 +264,9 @@
                                 "schema": {
                                     "type": "object",
                                     "example": {
-                                        "code": "OK",
-                                        "message": "Return output in Wookiee format",
-                                        "status": 200,
+                                        "code": 200,
+                                        "status": "OK",
+                                        "message": "OK",
                                         "data": {
                                             "format": "wookiee",
                                             "name": "Lhuorwo Sorroohraanorworc",
@@ -365,14 +367,14 @@
                                 "schema": {
                                     "type": "object",
                                     "example": {
-                                        "code": "OK",
-                                        "message": "Return a list of all films",
-                                        "status": 200,
+                                        "code": 200,
+                                        "status": "OK",
+                                        "message": "OK",
                                         "data": {
                                             "films": [
                                                 {
                                                     "format": null,
-                                                    "image": "https:\/\/cdn2.iconfinder.com\/data\/icons\/space-filled-outline-6\/128\/Space_-_Filled_Outline_-_38-13-512.png",
+                                                    "image": "https:\/\/cdn2.iconfinder.com\/data\/icons\/space-filled-outline-6\/128\/Space_-_Filled_Outline_-_38-20-512.png",
                                                     "title": "A New Hope",
                                                     "episodeId": 4,
                                                     "opening_crawl": "It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.\r\n\r\nDuring the battle, Rebel\r\nspies managed to steal secret\r\nplans to the Empire's\r\nultimate weapon, the DEATH\r\nSTAR, an armored space\r\nstation with enough power\r\nto destroy an entire planet.\r\n\r\nPursued by the Empire's\r\nsinister agents, Princess\r\nLeia races home aboard her\r\nstarship, custodian of the\r\nstolen plans that can save her\r\npeople and restore\r\nfreedom to the galaxy....",
@@ -435,12 +437,12 @@
                                 "schema": {
                                     "type": "object",
                                     "example": {
-                                        "code": "OK",
-                                        "message": "Return the classification of all species in the Episode # 4 - A New Hope",
-                                        "status": 200,
+                                        "code": 200,
+                                        "status": "OK",
+                                        "message": "OK",
                                         "data": {
                                             "format": null,
-                                            "image": "https:\/\/cdn2.iconfinder.com\/data\/icons\/space-filled-outline-6\/128\/Space_-_Filled_Outline_-_38-21-512.png",
+                                            "image": "https:\/\/cdn2.iconfinder.com\/data\/icons\/space-filled-outline-6\/128\/Space_-_Filled_Outline_-_38-9-512.png",
                                             "title": "A New Hope",
                                             "episodeId": 4,
                                             "opening_crawl": "It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.\r\n\r\nDuring the battle, Rebel\r\nspies managed to steal secret\r\nplans to the Empire's\r\nultimate weapon, the DEATH\r\nSTAR, an armored space\r\nstation with enough power\r\nto destroy an entire planet.\r\n\r\nPursued by the Empire's\r\nsinister agents, Princess\r\nLeia races home aboard her\r\nstarship, custodian of the\r\nstolen plans that can save her\r\npeople and restore\r\nfreedom to the galaxy....",
@@ -522,9 +524,9 @@
                                 "schema": {
                                     "type": "object",
                                     "example": {
-                                        "code": "OK",
-                                        "message": "We fetch all planets from all pages for StarWars Galaxy, merges all requests, remove unknown populations (not-integer). Sum population of all remaining planets. Return total count of planets that have population",
-                                        "status": 200,
+                                        "code": 200,
+                                        "status": "OK",
+                                        "message": "OK",
                                         "data": {
                                             "totalGalacticPopulation": 1711401432500,
                                             "noOfPlanetsWithWithPopulation": 43

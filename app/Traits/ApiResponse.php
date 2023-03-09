@@ -32,9 +32,9 @@ trait ApiResponse
     public function success(mixed $data, int $statusCode, string $message): JsonResponse
     {
         $data = [
-            'code' => Response::$statusTexts[$statusCode],
+            'code' => $statusCode,
+            'status' => Response::$statusTexts[$statusCode],
             'message' => $message,
-            'status' => $statusCode,
             'data' => $data,
         ];
 
@@ -68,9 +68,9 @@ trait ApiResponse
         }
 
         $data = [
-            'code' => Response::$statusTexts[$statusCode],
+            'code' => $statusCode,
+            'status' => Response::$statusTexts[$statusCode],
             'message' => $message,
-            'status' => $statusCode,
             'data' => $data,
         ];
 
