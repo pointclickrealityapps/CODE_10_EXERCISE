@@ -290,7 +290,7 @@ Please view the index page of this application for test case links.
 }
 ```
 
-> This response returns the details of Episode 4 - A New Hope as well as a collection of all species related to that episode
+> This response returns the details of Episode 1 - The Phantom Menace as well as a collection of all species related to that episode
 ```json
 {
   "code": 200,
