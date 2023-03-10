@@ -157,7 +157,157 @@ Links to the test cases are included within the app itself. These links will ret
 for this challenge.
 Please view the index page of this application for test case links.
 
+#### Although the test cases show responses related to each challenge requirement, we can get the details for any person (english or wookiee format), or the species details for any film. This is because the endpoints for person & film has been fully developed.
+
 > Each test case link will return a raw json response like the one below that has met the requirements
+
+### All Spaceships related to Luke Skywalker
+
+> This response returns the person details for Luke Skywalker as well as the spaceships related to this person.
+
+```json
+{
+    "code": 200,
+    "status": "OK",
+    "message": "OK",
+    "data": {
+        "format": null,
+        "url": "https://swapi.dev/api/people/1/",
+        "image": "http://test-code10:8888/assets/media/avatars/300-13.jpg",
+        "homeWorldImage": "http://test-code10:8888/assets/media/stock/600x400/img-50.jpg",
+        "name": "Luke Skywalker",
+        "height": 172,
+        "mass": 77,
+        "hairColor": "blond",
+        "skinColor": "fair",
+        "eyeColor": "blue",
+        "birthYear": "19BBY",
+        "gender": "male",
+        "homeWorld": "https://swapi.dev/api/planets/1/",
+        "createdOn": "2014-12-09T13:50:51.644000Z",
+        "editedOn": "2014-12-20T21:17:56.891000Z",
+        "noOfFilms": 4,
+        "noOfStarShips": 2,
+        "noOfVehicles": 2,
+        "starships": [
+            {
+                "image": "http://test-code10:8888/assets/media/stock/900x600/82.jpg",
+                "name": "X-wing",
+                "model": "T-65 X-wing",
+                "manufacturer": "Incom Corporation",
+                "cost_in_credits": 149999,
+                "length": 12,
+                "max_atmosphering_speed": 1050,
+                "crew": 1,
+                "passengers": 0,
+                "cargo_capacity": 110,
+                "consumables": "1 week",
+                "hyperdrive_rating": 1,
+                "starship_class": "Starfighter",
+                "created": "2014-12-12T11:19:05.340000Z",
+                "edited": "2014-12-20T21:23:49.886000Z",
+                "url": "https://swapi.dev/api/starships/12/"
+            },
+            {
+                "image": "http://test-code10:8888/assets/media/stock/900x600/21.jpg",
+                "name": "Imperial shuttle",
+                "model": "Lambda-class T-4a shuttle",
+                "manufacturer": "Sienar Fleet Systems",
+                "cost_in_credits": 240000,
+                "length": 20,
+                "max_atmosphering_speed": 850,
+                "crew": 6,
+                "passengers": 20,
+                "cargo_capacity": 80000,
+                "consumables": "2 months",
+                "hyperdrive_rating": 1,
+                "starship_class": "Armed government transport",
+                "created": "2014-12-15T13:04:47.235000Z",
+                "edited": "2014-12-20T21:23:49.900000Z",
+                "url": "https://swapi.dev/api/starships/22/"
+            }
+        ]
+    }
+}
+```
+
+### All Species for Episode 1
+
+> This response returns the details of episode 1 as well as a collection of all species related to that episode
+
+```json
+{
+  "code": 200,
+  "status": "OK",
+  "message": "OK",
+  "data": {
+    "format": null,
+    "image": "https://cdn2.iconfinder.com/data/icons/space-filled-outline-6/128/Space_-_Filled_Outline_-_38-1-512.png",
+    "title": "A New Hope",
+    "episodeId": 4,
+    "opening_crawl": "It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.\r\n\r\nDuring the battle, Rebel\r\nspies managed to steal secret\r\nplans to the Empire's\r\nultimate weapon, the DEATH\r\nSTAR, an armored space\r\nstation with enough power\r\nto destroy an entire planet.\r\n\r\nPursued by the Empire's\r\nsinister agents, Princess\r\nLeia races home aboard her\r\nstarship, custodian of the\r\nstolen plans that can save her\r\npeople and restore\r\nfreedom to the galaxy....",
+    "director": "George Lucas",
+    "producer": "Gary Kurtz, Rick McCallum",
+    "release_date": "1977-05-25",
+    "created": "2014-12-10T14:23:31.880000Z",
+    "edited": "2014-12-20T19:49:45.256000Z",
+    "url": "https://swapi.dev/api/films/1/",
+    "totalSpeciesCount": 5,
+    "species": [
+      {
+        "classification": "mammal",
+        "created": "2014-12-10T13:52:11.567000Z",
+        "edited": "2014-12-20T21:36:42.136000Z",
+        "url": "https://swapi.dev/api/species/1/"
+      },
+      {
+        "classification": "artificial",
+        "created": "2014-12-10T15:16:16.259000Z",
+        "edited": "2014-12-20T21:36:42.139000Z",
+        "url": "https://swapi.dev/api/species/2/"
+      },
+      {
+        "classification": "mammal",
+        "created": "2014-12-10T16:44:31.486000Z",
+        "edited": "2014-12-20T21:36:42.142000Z",
+        "url": "https://swapi.dev/api/species/3/"
+      },
+      {
+        "classification": "sentient",
+        "created": "2014-12-10T17:05:26.471000Z",
+        "edited": "2014-12-20T21:36:42.144000Z",
+        "url": "https://swapi.dev/api/species/4/"
+      },
+      {
+        "classification": "gastropod",
+        "created": "2014-12-10T17:12:50.410000Z",
+        "edited": "2014-12-20T21:36:42.146000Z",
+        "url": "https://swapi.dev/api/species/5/"
+      }
+    ]
+  }
+}
+```
+
+### Total population for all planets in the Star Wars Galaxy
+
+> This response returns the total sum of all planets that have a population in the Galaxy
+
+```json
+{
+  "code": 200,
+  "status": "OK",
+  "message": "OK",
+  "data": {
+    "totalGalacticPopulation": 1711401432500,
+    "noOfPlanetsWithWithPopulation": 43
+  }
+}
+```
+
+### All spaceships related to Luke Skywalker - Wookiee Format
+
+> This response returns the person details & related spaceship for a person in Wookiee language format
 
 ```json
 {
