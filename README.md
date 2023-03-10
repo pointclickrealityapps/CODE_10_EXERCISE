@@ -231,9 +231,10 @@ Please view the index page of this application for test case links.
 }
 ```
 
-### All Species for Episode 1
+### All Species for Episode 1 
+## I was not sure if the listing (Episode 1 - The Phantom Menace) was the first episode or if it was (Episode 4 - A New Hope)  as this film was released first, but wasn't the first episode.
 
-> This response returns the details of episode 1 as well as a collection of all species related to that episode
+> This response returns the details of Episode 4 - A New Hope as well as a collection of all species related to that episode
 
 ```json
 {
@@ -287,6 +288,152 @@ Please view the index page of this application for test case links.
     ]
   }
 }
+```
+
+> This response returns the details of Episode 4 - A New Hope as well as a collection of all species related to that episode
+```json
+{
+  "code": 200,
+  "status": "OK",
+  "message": "OK",
+  "data": {
+    "format": null,
+    "image": "https://cdn2.iconfinder.com/data/icons/space-filled-outline-6/128/Space_-_Filled_Outline_-_38-27-512.png",
+    "title": "The Phantom Menace",
+    "episodeId": 1,
+    "opening_crawl": "Turmoil has engulfed the\r\nGalactic Republic. The taxation\r\nof trade routes to outlying star\r\nsystems is in dispute.\r\n\r\nHoping to resolve the matter\r\nwith a blockade of deadly\r\nbattleships, the greedy Trade\r\nFederation has stopped all\r\nshipping to the small planet\r\nof Naboo.\r\n\r\nWhile the Congress of the\r\nRepublic endlessly debates\r\nthis alarming chain of events,\r\nthe Supreme Chancellor has\r\nsecretly dispatched two Jedi\r\nKnights, the guardians of\r\npeace and justice in the\r\ngalaxy, to settle the conflict....",
+    "director": "George Lucas",
+    "producer": "Rick McCallum",
+    "release_date": "1999-05-19",
+    "created": "2014-12-19T16:52:55.740000Z",
+    "edited": "2014-12-20T10:54:07.216000Z",
+    "url": "https://swapi.dev/api/films/4/",
+    "totalSpeciesCount": 20,
+    "species": [
+      {
+        "classification": "mammal",
+        "created": "2014-12-10T13:52:11.567000Z",
+        "edited": "2014-12-20T21:36:42.136000Z",
+        "url": "https://swapi.dev/api/species/1/"
+      },
+      {
+        "classification": "artificial",
+        "created": "2014-12-10T15:16:16.259000Z",
+        "edited": "2014-12-20T21:36:42.139000Z",
+        "url": "https://swapi.dev/api/species/2/"
+      },
+      {
+        "classification": "mammal",
+        "created": "2014-12-15T12:27:22.877000Z",
+        "edited": "2014-12-20T21:36:42.148000Z",
+        "url": "https://swapi.dev/api/species/6/"
+      },
+      {
+        "classification": "unknown",
+        "created": "2014-12-19T17:07:31.319000Z",
+        "edited": "2014-12-20T21:36:42.160000Z",
+        "url": "https://swapi.dev/api/species/11/"
+      },
+      {
+        "classification": "amphibian",
+        "created": "2014-12-19T17:30:37.341000Z",
+        "edited": "2014-12-20T21:36:42.163000Z",
+        "url": "https://swapi.dev/api/species/12/"
+      },
+      {
+        "classification": "mammal",
+        "created": "2014-12-19T17:48:56.893000Z",
+        "edited": "2014-12-20T21:36:42.165000Z",
+        "url": "https://swapi.dev/api/species/13/"
+      },
+      {
+        "classification": "mammal",
+        "created": "2014-12-19T17:53:11.214000Z",
+        "edited": "2014-12-20T21:36:42.167000Z",
+        "url": "https://swapi.dev/api/species/14/"
+      },
+      {
+        "classification": "mammals",
+        "created": "2014-12-20T09:48:02.406000Z",
+        "edited": "2014-12-20T21:36:42.169000Z",
+        "url": "https://swapi.dev/api/species/15/"
+      },
+      {
+        "classification": "reptile",
+        "created": "2014-12-20T09:53:16.481000Z",
+        "edited": "2014-12-20T21:36:42.171000Z",
+        "url": "https://swapi.dev/api/species/16/"
+      },
+      {
+        "classification": "unknown",
+        "created": "2014-12-20T09:57:33.128000Z",
+        "edited": "2014-12-20T21:36:42.173000Z",
+        "url": "https://swapi.dev/api/species/17/"
+      },
+      {
+        "classification": "unknown",
+        "created": "2014-12-20T10:02:13.915000Z",
+        "edited": "2014-12-20T21:36:42.175000Z",
+        "url": "https://swapi.dev/api/species/18/"
+      },
+      {
+        "classification": "unknown",
+        "created": "2014-12-20T10:08:36.795000Z",
+        "edited": "2014-12-20T21:36:42.177000Z",
+        "url": "https://swapi.dev/api/species/19/"
+      },
+      {
+        "classification": "mammal",
+        "created": "2014-12-20T10:15:33.765000Z",
+        "edited": "2014-12-20T21:36:42.179000Z",
+        "url": "https://swapi.dev/api/species/20/"
+      },
+      {
+        "classification": "amphibian",
+        "created": "2014-12-20T10:18:58.610000Z",
+        "edited": "2014-12-20T21:36:42.181000Z",
+        "url": "https://swapi.dev/api/species/21/"
+      },
+      {
+        "classification": "mammal",
+        "created": "2014-12-20T10:26:59.894000Z",
+        "edited": "2014-12-20T21:36:42.183000Z",
+        "url": "https://swapi.dev/api/species/22/"
+      },
+      {
+        "classification": "mammal",
+        "created": "2014-12-20T10:29:13.798000Z",
+        "edited": "2014-12-20T21:36:42.186000Z",
+        "url": "https://swapi.dev/api/species/23/"
+      },
+      {
+        "classification": "unknown",
+        "created": "2014-12-20T10:32:13.046000Z",
+        "edited": "2014-12-20T21:36:42.188000Z",
+        "url": "https://swapi.dev/api/species/24/"
+      },
+      {
+        "classification": "mammal",
+        "created": "2014-12-20T10:34:50.827000Z",
+        "edited": "2014-12-20T21:36:42.189000Z",
+        "url": "https://swapi.dev/api/species/25/"
+      },
+      {
+        "classification": "unknown",
+        "created": "2014-12-20T10:49:21.692000Z",
+        "edited": "2014-12-20T21:36:42.191000Z",
+        "url": "https://swapi.dev/api/species/26/"
+      },
+      {
+        "classification": "amphibian",
+        "created": "2014-12-20T10:53:28.795000Z",
+        "edited": "2014-12-20T21:36:42.193000Z",
+        "url": "https://swapi.dev/api/species/27/"
+      }
+    ]
+  }
+}
+
 ```
 
 ### Total population for all planets in the Star Wars Galaxy
